@@ -6,7 +6,7 @@
 /*   By: sikang <sikang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:41:24 by sikang            #+#    #+#             */
-/*   Updated: 2022/01/13 05:32:10 by sikang           ###   ########.fr       */
+/*   Updated: 2022/01/19 12:16:09 by sikang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static void	action(int sig, siginfo_t *info, void *context)
 	static pid_t			client_pid;
 
 	(void)context;
-	if (client_pid == 0) client_pid = info->si_pid;
+	if (client_pid == 0)
+		client_pid = info->si_pid;
 	c |= (sig == SIGUSR1);
 	if (++i == 8)
 	{
 		i = 0;
-		if(c == 0)
+		if (c == 0)
 		{
 			kill(client_pid, SIGUSR1);
 			client_pid = 0;
@@ -35,10 +36,11 @@ static void	action(int sig, siginfo_t *info, void *context)
 		write(1, &c, 1);
 		c = 0;
 	}
-	else c <<= 1;
+	else
+		c <<= 1;
 }
 
-int			main(void)
+int	main(void)
 {
 	struct sigaction	act;
 

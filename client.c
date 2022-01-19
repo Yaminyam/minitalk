@@ -6,7 +6,7 @@
 /*   By: sikang <sikang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:41:21 by sikang            #+#    #+#             */
-/*   Updated: 2022/01/13 05:48:05 by sikang           ###   ########.fr       */
+/*   Updated: 2022/01/19 12:14:35 by sikang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "libft/libft.h"
 
-static void action(int sig, siginfo_t *info, void *context)
+static void	action(int sig, siginfo_t *info, void *context)
 {
 	(void)info;
 	(void)context;
@@ -29,11 +29,13 @@ static void	mt_kill(int pid, char *str)
 {
 	char	c;
 	int		i;
+
 	while (*str)
 	{
 		i = 8;
 		c = *str++;
-		while (i--) {
+		while (i--)
+		{
 			if (c >> i & 1)
 				kill(pid, SIGUSR1);
 			else
@@ -49,7 +51,7 @@ static void	mt_kill(int pid, char *str)
 	}
 }
 
-int			main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	struct sigaction	act;
 
